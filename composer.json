@@ -6,7 +6,7 @@
       "package",
       "extension"
    ],
-   "homepage": "https://github.com/package-name",
+   "homepage": "https://github.com/vendor/package-name",
    "license": "MIT",
    "type": "library",
    "authors": [
