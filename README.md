@@ -23,6 +23,18 @@ You can install the package via Composer:
 composer require vendor/package-name
 ```
 
+## Usage
+
+You can use this package by doing something:
+
+```php
+use Vendor\PackageName\Inspire;
+
+function beInspired(): {
+  return Inspire::workMagick();
+}
+```
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
