@@ -1,0 +1,44 @@
+# This sample workflow will deploy your readme as a HydePHP site to GitHub Pages
+# when you push to the main or master branch. To enable this workflow, remove
+# the `.example` suffix from this file, and enable GitHub Pages in your
+# repository settings, and set the deployment source to "Actions".
+
+# Later on, you might want something more robust.
+# See the HydePHP documentation and the HydePHP Action documentation for learn more.
+# See https://github.com/hydephp/action and https://hydephp.com/docs
+
+name: Build and Deploy HydePHP Documentation Site
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Hyde site
+        run: |
+          mkdir hyde && mkdir hyde/_docs
+          mv README.md hyde/_docs/index.md
+          echo "# Sample configuration
+          name: My HydePHP Package
+          load_app_styles_from_cdn: true
+          use_play_cdn: true
+          output_directories:
+            documentation-page: ''
+          " > hyde/hyde.yml
+
+      - uses: hydephp/action@master
+        with:
+          deploy-to: "pages"
+          directory: "hyde"
+          env-torchlight-token: ${{ secrets.TORCHLIGHT_TOKEN }}
